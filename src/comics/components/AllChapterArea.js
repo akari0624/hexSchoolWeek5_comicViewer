@@ -29,8 +29,12 @@ const ChapterItem = Styled.li`
   font-family: Roboto-Bold;
   font-size: 16px;
   color: #000000;
-  margin:15px 0px 15px 30px;
+  padding:15px 0px 15px 30px;
   
+  &:hover{
+    background-color:#000000;
+    color:#FFFFFF;
+  }
 `
 
 const renderChapterList = (chapterArr) => {
