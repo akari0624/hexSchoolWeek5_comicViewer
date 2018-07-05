@@ -10,16 +10,7 @@ const OuttestWrapper = Styled.main`
   background-color:#FFFFFF;
 `
 
-const UpperNav = Styled.nav`
-  width:100%;
-  height:74px;
-  background-color:#000000;
-  font-family: Roboto-BlackItalic;
-  font-size: 36px;
-  color: #50FF44;
-  text-align:center;
-  line-height:74px;
-`
+
 
 const UpperComicInfoArea = Styled.section`
   width:calc(100% - 60px);
@@ -67,7 +58,6 @@ export default(props) => {
 
   return (
     <OuttestWrapper>
-      <UpperNav>Comicomic</UpperNav>
       <UpperComicInfoArea>
         <LeftComicCoverImageWrapper>
           <ComicCoverImage src={coverImage} />
