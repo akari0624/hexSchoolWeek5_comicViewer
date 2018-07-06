@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-
+import ComicPafesReducer from '../reducers/comicReducer'
 
 const rootReducer = combineReducers({
 
-  state:(state= {}) => state
+  comicPages:ComicPafesReducer
 })
 
 

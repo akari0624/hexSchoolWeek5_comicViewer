@@ -6,7 +6,7 @@ import AllChapterArea from './components/AllChapterArea'
 
 const OuttestWrapper = Styled.main`
   width:100vw;
-  height:100vh;
+  height:calc(100% - 74px );
   background-color:#FFFFFF;
 `
 

@@ -6,8 +6,9 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import reducers from './reducers'
 
-import indexRouter from './comics'
+import ComicInfoPage from './comics/ComicInfoPage'
 import NavBar from './appLevel/navbar'
+import ComicDetailPage from './comics/ComicDetailPage'
 
 const createStoreWithMiddleware = applyMiddleware()(createStore)
 
@@ -22,13 +23,14 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       
       <BrowserRouter>
-        <div>
+        <React.Fragment>
           <NavBar />
           <Switch>
-            <Route path="/" component={indexRouter}/>
+            <Route path="/comicpage" component={ComicDetailPage} />
+            <Route path="/" component={ComicInfoPage}/>
             <Route path="*" render={()=> <Redirect to="/" />} />
           </Switch>
-        </div>
+        </React.Fragment>
       </BrowserRouter>
     </ThemeProvider>
   </Provider>, document.querySelector('.container'))
