@@ -78,11 +78,16 @@ const renderCurrComicPageImage = (pageUrlArr, pageIndex) => {
 }
 
 
+const AllPagesSliderAreaWrapper = Styled.div`
+  height:250px;
+`
+
 
 const AllPagesSliderWrapper  = Styled.ol`
   
   width:calc(100% - 30px * 2);
   height:200px;
+  padding-top:50px;
   overflow-x:scroll;
   overflow-y:hidden;
   white-space: nowrap;
@@ -182,10 +187,12 @@ class ComicDetailPage extends Component{
             <ArrowButton direction="right" onClick={this.onNextPageClick} />
           </ComicCurrentPageArea>
         </ComicDetailPageWrapper>
-  
-        <AllPagesSliderWrapper innerRef={tRef => this.allPagesSliderWrapperRef = tRef}>
-          {renderComicPagesSlider( this.props.comicPages, this.state.currPage, this.onImageInSliderClick )}
-        </AllPagesSliderWrapper>
+
+        <AllPagesSliderAreaWrapper>
+          <AllPagesSliderWrapper innerRef={tRef => this.allPagesSliderWrapperRef = tRef}>
+            {renderComicPagesSlider( this.props.comicPages, this.state.currPage, this.onImageInSliderClick )}
+          </AllPagesSliderWrapper>
+        </AllPagesSliderAreaWrapper>  
       </React.Fragment>
     )
   }
