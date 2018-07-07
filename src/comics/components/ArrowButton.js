@@ -4,37 +4,31 @@ import PropTypes from 'prop-types'
 
 
 const ArrowButtonWrapper = Styled.div`
-  position:relative;
-  bottom:50%;
-  transform:translateY(50%);
   width:30px;
-  display:inline-block;
-  font-size:0;
+  font-size:30px;
   color:#000000;
+  background-color:#FFFFFF;
+  text-align:center;
+  display:flex;
+  align-items:center;
 
-  &:hover{
-    color:#FFFFFF;
-    background-color:#000000;
+    &:hover{
+       background-color:#000000;
+       color:#FFFFFF;
   }
 `
 
-const ArrowButtonInside = Styled.a`
-  width:100%;
-  color:#000000;
-  font-size:30px;
-  text-decoration:none;
-  line-height:100%;
-`
+
 
 
 const renderDifferentButtonByProps = (direction) => {
 
   if(direction === 'left'){
-    return <ArrowButtonInside>&lt;</ArrowButtonInside>
+    return <i className="fas fa-arrow-left"></i>;
   }
 
   if(direction === 'right'){
-    return <ArrowButtonInside>&gt;</ArrowButtonInside>
+    return <i className="fas fa-arrow-right"></i>
   }
 
 }

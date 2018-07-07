@@ -5,8 +5,9 @@ import PropTypes from 'prop-types'
 
 
 const ImageWrap_li = Styled.li`
+  position:relative
   height:100%;
-  display:inline;
+  display:inline-block;
 `
 
 const ImageWrapCruuPage_li = Styled.li`
@@ -15,9 +16,16 @@ const ImageWrapCruuPage_li = Styled.li`
   border:5px solid green;
 `
 
+const PageNumberInidicator = Styled.div`
+  position:absolute;
+  top:-5px;
+  left:48%;
+  height:10px;
+`
+
 const SmallComicPageInSlider = Styled.img`
-  display:inline-block;
-  height:100%;
+  display:block;
+  height:calc(100% - 10px);
 `
 
 
@@ -39,7 +47,11 @@ const ImageInComicPageSlider = props => {
       <ImageWrapCruuPage_li  className={Curr_PageImg_ClassName} onClick={handleClick}><SmallComicPageInSlider  src={imgUrl} /></ImageWrapCruuPage_li>
     )
   }
-  return (<ImageWrap_li><SmallComicPageInSlider  src={imgUrl} onClick={handleClick} /></ImageWrap_li>)
+  return (
+    <ImageWrap_li>
+      <PageNumberInidicator>{tIndex+1}</PageNumberInidicator>
+      <SmallComicPageInSlider  src={imgUrl} onClick={handleClick} />
+    </ImageWrap_li>)
 
 
 
