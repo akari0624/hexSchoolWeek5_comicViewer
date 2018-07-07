@@ -9,18 +9,57 @@ import ImageInComicPageSlider from './components/ImageInComicPagesSlider'
 
 import { Curr_PageImg_ClassName } from './components/ImageInComicPagesSlider'
 
+
+const ComicChapterPageControlArea = Styled.div`
+  width:100%;
+`
+
+const ChapterSelectorWrapper = Styled.div`
+  width:30%;
+  display:inline-block;
+`
+
+const PageSelect = Styled.select`
+  width:200px;
+  padding:6px 15px;
+  height:50px;
+  background-color:#FFFFFF;
+  border:2px solid #000000;
+  font-size:15px;
+  vertical-align:middle;
+`
+
+const renderOptions = (urlArr) => (
+  urlArr.map((url, i) => (
+    <option key={url} value={i}>第{i+1}頁</option>
+  ))
+)
+
+const renderPageSelect = (comicPagesImgUrlArr, selectOnChangeHandler, currPage) => {
+
+  return (
+    <PageSelect onChange={selectOnChangeHandler} value={currPage}>
+      {renderOptions(comicPagesImgUrlArr)}
+    </PageSelect>  
+  )
+  
+}
+
+
 const ComicDetailPageWrapper = Styled.main`
   width:100%;
 `
 
 const ComicCurrentPageArea = Styled.div`
+  display:flex;
+  flex-direction:row;
+  align-items:stretch;
   width:100%;
 `
 
 const ComicCurrentPageImageWrapper = Styled.section`
 
   width:calc(100% - 30px * 2);
-  display:inline-block;
   font-size:0;
 `
 
@@ -113,6 +152,13 @@ class ComicDetailPage extends Component{
     this.setState({currPage:previousIndex})
   }
 
+  onPageSelectChange = (event) => {
+    const index = parseInt(event.target.value, 10)
+
+    console.log('selector value:', index)
+    this.setState({currPage:index})
+  } 
+
   onImageInSliderClick = (index) => {
 
     this.setState({currPage:index})
@@ -121,6 +167,12 @@ class ComicDetailPage extends Component{
   render(){
     return(
       <React.Fragment>
+        <ComicChapterPageControlArea>
+          <ChapterSelectorWrapper>
+            {renderPageSelect(this.props.comicPages, this.onPageSelectChange, this.state.currPage)}
+          </ChapterSelectorWrapper>
+        </ComicChapterPageControlArea>
+
         <ComicDetailPageWrapper>
           <ComicCurrentPageArea>
             <ArrowButton direction="left"  onClick={this.onPreviousPageClick}/>
