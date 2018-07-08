@@ -1,4 +1,4 @@
-import { GET_COMIC_BY_COMIC_NAME_AND_CHAPTER } from '../types'
+import { GET_COMIC_BY_COMIC_NAME_AND_CHAPTER, GET_COMIC_CHAPTER_INFO_BY_COMIC_NAME } from '../types'
 import page01 from '../../../static/img/storyboard-1.png'
 import page02 from '../../../static/img/storyboard-2.png'
 import page03 from '../../../static/img/storyboard-3.png'
@@ -17,11 +17,23 @@ const  comicPagesURLs = [page01,page02,page03,page04,page05,page06,page07,page08
   page11,page12
 ]
 
+const comicChapterInfo = ['Chapter 1: The F2E Challenge Start!', 'Chapter 2: Todo List is Going Crazy!']
+
 export const GetComicPagesByNameAndChapter = (name, chapter) => {
 
   return {
     type:GET_COMIC_BY_COMIC_NAME_AND_CHAPTER,
     payload:comicPagesURLs,
+  }
+
+}
+
+
+export const GetChapterInfoOfThisComic = (comicName) => {
+
+  return {
+    type:GET_COMIC_CHAPTER_INFO_BY_COMIC_NAME,
+    payload:comicChapterInfo
   }
 
 }

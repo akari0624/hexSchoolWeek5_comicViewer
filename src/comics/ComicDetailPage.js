@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import ArrowButton from './components/ArrowButton'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { GetComicPagesByNameAndChapter } from './actions'
+import { GetComicPagesByNameAndChapter, GetChapterInfoOfThisComic } from './actions'
 import ImageInComicPageSlider from './components/ImageInComicPagesSlider'
 
 import { Curr_PageImg_ClassName } from './components/ImageInComicPagesSlider'
@@ -16,6 +16,36 @@ const ComicChapterPageControlArea = Styled.div`
 
 const ChapterSelectorWrapper = Styled.div`
   width:30%;
+  padding-left:15px;
+  padding-top:5px;
+  display:inline-block;
+`
+
+const ChapterSelect = Styled.select`
+  width:200px;
+  padding:6px 15px;
+  height:50px;
+  background-color:#FFFFFF;
+  border:2px solid #000000;
+  font-size:15px;
+  vertical-align:middle;
+`
+
+
+const renderChapterSelect = (chapterInfoArr, selectOnChangeHandler, currChapterIndex) => {
+
+  return (
+    <ChapterSelect onChange={selectOnChangeHandler} value={currChapterIndex}>
+      {renderChapterOptions(chapterInfoArr)}
+    </ChapterSelect>  
+  )
+  
+}
+
+const PageSelectorWrapper = Styled.div`
+  width:30%;
+  padding-left:15px;
+  padding-top:5px;
   display:inline-block;
 `
 
@@ -32,6 +62,12 @@ const PageSelect = Styled.select`
 const renderOptions = (urlArr) => (
   urlArr.map((url, i) => (
     <option key={url} value={i}>第{i+1}頁</option>
+  ))
+)
+
+const renderChapterOptions = (chapterArr) => (
+  chapterArr.map((cName, i) => (
+    <option key={cName} value={i}>{cName}</option>
   ))
 )
 
@@ -131,6 +167,7 @@ class ComicDetailPage extends Component{
 
     this.state = {
       currPage:0,
+      currChapter:0,
     }
   }
 
@@ -164,6 +201,19 @@ class ComicDetailPage extends Component{
     this.setState({currPage:index})
   } 
 
+  onChapterSelectChange = (event) => {
+    const index = parseInt(event.target.value, 10)
+
+    console.log('chapter selector value change to:', index)
+    
+    this.setState({
+      currPage:0,
+      currChapter:index
+    })
+
+    this.props.GetComicPagesByNameAndChapter(null, null)
+  } 
+
   onImageInSliderClick = (index) => {
 
     this.setState({currPage:index})
@@ -174,8 +224,11 @@ class ComicDetailPage extends Component{
       <React.Fragment>
         <ComicChapterPageControlArea>
           <ChapterSelectorWrapper>
-            {renderPageSelect(this.props.comicPages, this.onPageSelectChange, this.state.currPage)}
+            {renderChapterSelect(this.props.chaptersInfo, this.onChapterSelectChange, this.state.currChapter)}
           </ChapterSelectorWrapper>
+          <PageSelectorWrapper>
+            {renderPageSelect(this.props.comicPages, this.onPageSelectChange, this.state.currPage)}
+          </PageSelectorWrapper>
         </ComicChapterPageControlArea>
 
         <ComicDetailPageWrapper>
@@ -199,6 +252,7 @@ class ComicDetailPage extends Component{
 
   componentDidMount(){
 
+    this.props.GetChapterInfoOfThisComic(null)
     this.props.GetComicPagesByNameAndChapter(null,null)
 
   }
@@ -215,13 +269,16 @@ class ComicDetailPage extends Component{
 ComicDetailPage.propTypes = {
 
   comicPages:PropTypes.array.isRequired,
+  chaptersInfo:PropTypes.array.isRequired,
   GetComicPagesByNameAndChapter:PropTypes.func.isRequired,
+  GetChapterInfoOfThisComic:PropTypes.func.isRequired,
 }
 
-function mapStateToProps({comicPages}){
+function mapStateToProps({comicPages, chaptersInfo}){
 
   return {
-    comicPages
+    comicPages,
+    chaptersInfo,
   }
 
 
@@ -230,7 +287,7 @@ function mapStateToProps({comicPages}){
 function mapDispatchToProps(dispatch){
 
 
-  return bindActionCreators({GetComicPagesByNameAndChapter}, dispatch)
+  return bindActionCreators({GetComicPagesByNameAndChapter, GetChapterInfoOfThisComic}, dispatch)
 }
 
 
