@@ -23,13 +23,17 @@ const LeftComicCoverImageWrapper = Styled.div`
   width:50%;
   height:500px;
   border: 4px solid #000000;
+  display:flex;
+  justify-content:center;
     @media(max-width:${props => props.theme.mobileOneColumnWidth}){
     width:100%;
     }
+
 `
 
 const ComicCoverImage = Styled.img`
-  width:100%;
+ 
+  max-width:700px;
   height:100%;
 `
 

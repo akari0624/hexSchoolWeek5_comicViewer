@@ -1,6 +1,7 @@
 import React from 'react'
 import Styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 
 const AllChapterAreaWrapper = Styled.div`
@@ -30,12 +31,18 @@ const ChapterItem = Styled.li`
   font-size: 16px;
   color: #000000;
   padding:15px 0px 15px 30px;
+  cursor:pointer;
   
   &:hover{
     background-color:#000000;
     color:#FFFFFF;
   }
 `
+
+const styleForLink = {
+
+  textDecoration:'none',
+}
 
 const renderChapterList = (chapterArr) => {
 
@@ -44,7 +51,9 @@ const renderChapterList = (chapterArr) => {
   }
 
   return chapterArr.map(c => (
-    <ChapterItem key={c}>{c}</ChapterItem>
+    <Link key={c} to="/comicpage" style={styleForLink}>
+      <ChapterItem >{c}</ChapterItem>
+    </Link>
   ))
 
 }
