@@ -12,17 +12,18 @@ import { Curr_PageImg_ClassName } from './components/ImageInComicPagesSlider'
 
 const ComicChapterPageControlArea = Styled.div`
   width:100%;
+  display:flex;
+  justify-content:flex-start;
 `
 
 const ChapterSelectorWrapper = Styled.div`
-  width:30%;
+  width:200px;
   padding-left:15px;
   padding-top:5px;
-  display:inline-block;
 `
 
 const ChapterSelect = Styled.select`
-  width:200px;
+  width:100%;
   padding:6px 15px;
   height:50px;
   background-color:#FFFFFF;
@@ -43,14 +44,13 @@ const renderChapterSelect = (chapterInfoArr, selectOnChangeHandler, currChapterI
 }
 
 const PageSelectorWrapper = Styled.div`
-  width:30%;
+  width:100px;
   padding-left:15px;
   padding-top:5px;
-  display:inline-block;
 `
 
 const PageSelect = Styled.select`
-  width:200px;
+  width:100%;
   padding:6px 15px;
   height:50px;
   background-color:#FFFFFF;
@@ -205,7 +205,7 @@ class ComicDetailPage extends Component{
     const index = parseInt(event.target.value, 10)
 
     console.log('chapter selector value change to:', index)
-    
+
     this.setState({
       currPage:0,
       currChapter:index
